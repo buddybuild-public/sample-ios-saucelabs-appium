@@ -24,7 +24,8 @@ xcodebuild -project "m2048.xcodeproj" \
 echo "=== Beginning upload of app to saucelabs ==="
 # saucelabs expects the app to be zipped
 zip -r $ZIPPED_APP $SIMULATOR_APP_PATH
-curl -u $SAUCE_USERNAME:$SAUCE_ACCESS_KEY -X POST  \
+curl --silent --output /dev/null \
+	-u $SAUCE_USERNAME:$SAUCE_ACCESS_KEY -X POST  \
 	-H "Content-Type: application/octet-stream" \
 	https://saucelabs.com/rest/v1/storage/$SAUCE_USERNAME/test_app.zip?overwrite=true \
 	--data-binary @$ZIPPED_APP
